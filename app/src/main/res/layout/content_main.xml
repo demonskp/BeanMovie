@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:background="#FFFAF0"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/main_nev_btn"
+            android:layout_gravity="center"
+            android:layout_width="20dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/ic_button" />
+
+
+        <LinearLayout
+            android:layout_margin="10dp"
+            android:id="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/bg_search_grey">
+
+            <ImageView
+                android:layout_marginLeft="90dp"
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:src="@mipmap/ic_search_normal" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="电影/电视剧/影人"
+                 />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/control"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2">
+
+    </FrameLayout>
+
+
+    <RadioGroup
+        android:background="#FFFAF0"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/selector_rb_recent"
+            android:gravity="center_horizontal"
+            android:text="即将上映"
+            android:textColor="@drawable/selector_text_main" />
+
+        <RadioButton
+            android:id="@+id/rb2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/selector_rb_seeing"
+            android:gravity="center_horizontal"
+            android:text="正在热映"
+            android:textColor="@drawable/selector_text_main" />
+
+        <RadioButton
+            android:id="@+id/rb3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/selector_rb_top"
+            android:gravity="center_horizontal"
+            android:text="Top250"
+            android:textColor="@drawable/selector_text_main" />
+
+    </RadioGroup>
+
+</LinearLayout>

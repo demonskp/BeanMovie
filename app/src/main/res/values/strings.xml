@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">豆影</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="about_us_app">豆影是一家以互联网方式向用户提供电影，影视、动漫、游戏、综艺、体育等宽频娱乐内容服务的综合性多媒体宽带娱乐app。</string>
+    <string name="about_us_info">
+        Product Manager：易镇艺\nMember：李良荣，喻青松，朱松麒
+    </string>
+</resources>

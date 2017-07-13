@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_DDDDDD"
+    tools:context="com.fykj.yzy.beanmovie.ModifyUserInfoActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/color_FFFFFF">
+
+        <ImageView
+            android:id="@+id/nav_top_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/nav_about_back"/>
+
+        <TextView
+            android:id="@+id/nav_top_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="修改信息"
+            android:textColor="@color/color_333333"
+            android:textSize="17sp"/>
+        <Button
+            android:id="@+id/modify_user_info"
+            android:text="编辑"
+            android:textSize="17sp"
+            android:background="@null"
+            android:textColor="@color/color_333333"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/color_DDDDDD"/>
+
+    <LinearLayout
+        android:background="@color/color_FFFFFF"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
+
+            <TextView
+                android:id="@+id/text_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:focusable="true"
+                android:text="昵称"
+                android:textColor="@color/color_333333"
+                android:textSize="15sp"/>
+
+            <EditText
+                android:id="@+id/nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:gravity="right|center_vertical"
+                android:layout_toRightOf="@id/text_nickname"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:lines="1"
+                android:text="海马玩"
+                android:textColor="@color/color_DDDDDD"
+                android:textSize="14sp"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/color_DDDDDD"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/color_FFFFFF"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:focusable="true"
+                android:text="密码"
+                android:textColor="@color/color_333333"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tv_click_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:gravity="center"
+                android:text="点击可修改"
+                android:textColor="@color/color_DDDDDD"
+                android:textSize="14sp"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/color_DDDDDD"/>
+
+    <LinearLayout
+        android:background="@color/color_FFFFFF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="个人签名"
+                android:textColor="@color/color_333333"
+                android:textSize="15sp"/>
+
+
+        <EditText
+            android:gravity="top"
+            android:id="@+id/autograph_text"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:text="123456789"
+            android:background="@null"
+            android:textColor="@color/color_DDDDDD"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/color_DDDDDD"/>
+    </LinearLayout>
+
+</LinearLayout>

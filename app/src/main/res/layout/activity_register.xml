@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+
+    >
+
+    <TextView
+        style="@style/pagetitle"
+        android:text="欢迎加入豆影"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/register_tel"
+            android:hint="手机号/邮箱"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            />
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+
+                android:id="@+id/register_password"
+                android:hint="密码（最少6位）"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:inputType="textPassword"
+                />
+            <CheckBox
+                android:id="@+id/eye"
+
+                android:button="@drawable/selector_eye"
+                android:layout_alignParentRight="true"
+                android:layout_width="40dp"
+                android:layout_height="35dp"/>
+        </RelativeLayout>
+
+        <EditText
+            android:id="@+id/register_nickn"
+            android:hint="昵称"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            />
+
+        <Button
+            android:id="@+id/bt_register"
+            android:background="@drawable/button_shape"
+            android:textColor="#ffffff"
+            android:text="注册"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            />
+        <TextView
+            android:gravity="center"
+            android:textSize="16.5sp"
+            android:text="点击注册代表你已阅读并同意用户使用协议"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+</LinearLayout>
