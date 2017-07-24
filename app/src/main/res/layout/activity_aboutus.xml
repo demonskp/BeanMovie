@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/color_EFEFEF"
-    tools:context="com.fykj.yzy.beanmovie.AboutusActivity">
+    tools:context="com.fykj.yzy.beanmovie.activity.AboutusActivity">
     <RelativeLayout
         android:background="@color/color_FFFFFF"
         android:layout_width="match_parent"

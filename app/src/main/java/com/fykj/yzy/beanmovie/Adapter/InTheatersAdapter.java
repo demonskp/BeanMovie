@@ -1,8 +1,6 @@
 package com.fykj.yzy.beanmovie.Adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.RecyclerView;
@@ -11,26 +9,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.fykj.yzy.beanmovie.DB.DBManage;
-import com.fykj.yzy.beanmovie.MovieInfoActivity;
 import com.fykj.yzy.beanmovie.R;
 import com.fykj.yzy.beanmovie.bean.CollectionBean;
-import com.fykj.yzy.beanmovie.bean.HistoryBean;
 import com.fykj.yzy.beanmovie.bean.SubjectsBean;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.zip.Inflater;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -75,6 +66,10 @@ public class InTheatersAdapter extends RecyclerView.Adapter<InTheatersAdapter.My
         holder.directorsText.setText("导演："+directorName);
         holder.castsText.setText("演员："+castsName);
         holder.ratingText.setText(rating+"  "+subjectsBean.getRating().getAverage());
+
+
+
+
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,6 +77,16 @@ public class InTheatersAdapter extends RecyclerView.Adapter<InTheatersAdapter.My
                 startNextActivity(subjectsBean);
             }
         });
+
+        Long id=Long.valueOf(subjectsBean.getId());
+        List<CollectionBean> list=dbManage.findCollection(id);
+        if (list.size()!=0){
+            holder.ischecked=true;
+            holder.collectionButton.setBackgroundResource(R.drawable.ic_collection_yes);
+        }else {
+            holder.ischecked=false;
+            holder.collectionButton.setBackgroundResource(R.drawable.ic_collection_no);
+        }
 
         holder.collectionButton.setOnClickListener(new View.OnClickListener() {
             @Override

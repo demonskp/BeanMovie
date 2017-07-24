@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.fykj.yzy.beanmovie.activity.SearchResultActivity">
+    tools:context="com.fykj.yzy.beanmovie.activity.CollectionActivity">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/search_result_listView"
+        android:id="@+id/collection_recycleList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

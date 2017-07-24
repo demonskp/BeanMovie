@@ -1,33 +1,27 @@
-package com.fykj.yzy.beanmovie;
+package com.fykj.yzy.beanmovie.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.RadioButton;
-import android.widget.Toast;
+import android.widget.TextView;
 
-import com.fykj.yzy.beanmovie.bean.SubjectsBean;
-import com.fykj.yzy.beanmovie.bean.TOP250Bean;
-import com.fykj.yzy.beanmovie.net.DataNet;
-import com.fykj.yzy.beanmovie.net.OkHttpUnit;
-
-import java.io.IOException;
-import java.util.List;
+import com.fykj.yzy.beanmovie.bean.User;
+import com.fykj.yzy.beanmovie.bean.UserHolder;
+import com.fykj.yzy.beanmovie.fragment.InTheatersFragment;
+import com.fykj.yzy.beanmovie.R;
+import com.fykj.yzy.beanmovie.fragment.TOP250Fragment;
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,15 +31,17 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,CompoundButton.OnCheckedChangeListener {
     private static final String TAG = "MainActivity";
 
+    private User nowUser;
+
 
     //yqs
-    InTheatersFragment mrecentFragment;
-    InTheatersFragment mingFragment;
-    InTheatersFragment mtopFragment;
+    InTheatersFragment inTheatersFragment;
+    InTheatersFragment comingSoonFragment;
+    TOP250Fragment top250Fragment;
 
-    String recent="recent";
-    String ing="ing";
-    String top="top";
+    private static final String INTHEATERS="recent";
+    private static final String COMINGSOON="ing";
+    private static final String TOP250="top";
 
     @BindView(R.id.drawer_layout)
     DrawerLayout drawer;
@@ -67,14 +63,27 @@ public class MainActivity extends AppCompatActivity
     @BindView(R.id.rb3)
     RadioButton rb3;
 
+    TextView nameText;
+    TextView mottoText;
+    ImageView headerImage;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        nowUser= UserHolder.getUserHolder().getUser();
         ButterKnife.bind(this);
-        navigationView.setNavigationItemSelectedListener(this);
+
+
+
         initView();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        nowUser= UserHolder.getUserHolder().getUser();
     }
 
     @Override
@@ -103,7 +112,7 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent2);
                 break;
             case R.id.nav_collection:
-                Intent intent3=new Intent(this,RegisterActivity.class);
+                Intent intent3=new Intent(this,CollectionActivity.class);
                 startActivity(intent3);
 
         }
@@ -117,15 +126,15 @@ public class MainActivity extends AppCompatActivity
         switch (buttonView.getId()){
             case R.id.rb1:
                 if(isChecked)
-                    showrecent();
+                    showInTheater();
                 break;
             case R.id.rb2:
                 if(isChecked)
-                    showing();
+                    showComingSoon();
                 break;
             case R.id.rb3:
                 if(isChecked)
-                    showtop();
+                    showTOP250();
                 break;
         }
     }
@@ -139,59 +148,74 @@ public class MainActivity extends AppCompatActivity
 
 
     public  void initView(){
+
+        initDrawUserInfo();
+
+        navigationView.setNavigationItemSelectedListener(this);
+
         rb1.setOnCheckedChangeListener(this);
         rb2.setOnCheckedChangeListener(this);
         rb3.setOnCheckedChangeListener(this);
+        rb2.performClick(); //预点击
 
-        /**
-         * 代码点击事件
-         */
-        rb2.performClick();
+    }
+
+    private void initDrawUserInfo() {
+        View headerLayout=navigationView.getHeaderView(0);
+        nameText= (TextView) headerLayout.findViewById(R.id.user_name);
+        mottoText= (TextView) headerLayout.findViewById(R.id.user_motto);
+        headerImage= (ImageView) headerLayout.findViewById(R.id.user_header);
+        nowUser= UserHolder.getUserHolder().getUser();
+        if (nowUser.getName()!=null){
+            nameText.setText(nowUser.getName());
+        }
+        if (nowUser.getMotto()!=null){
+            mottoText.setText(nowUser.getMotto());
+        }
+        Picasso.with(this).load(R.mipmap.ic_movie_logo).into(headerImage);
     }
 
 
-    private void showrecent() {
+    private void showInTheater() {
         
-        mrecentFragment = (InTheatersFragment) getSupportFragmentManager().findFragmentByTag(recent);
-        if (mrecentFragment == null) {
+        inTheatersFragment = (InTheatersFragment) getSupportFragmentManager().findFragmentByTag(INTHEATERS);
+        if (inTheatersFragment == null) {
             FragmentManager manager = getSupportFragmentManager();
             FragmentTransaction transaction = manager.beginTransaction();
-            mrecentFragment = new InTheatersFragment(InTheatersFragment.COMESOON);
-            transaction.replace(R.id.control, mrecentFragment, recent);
+            inTheatersFragment = new InTheatersFragment(InTheatersFragment.COMESOON);
+            transaction.replace(R.id.control, inTheatersFragment, INTHEATERS);
             transaction.commit();
         } else {
-            getSupportFragmentManager().beginTransaction().replace(R.id.control,mrecentFragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.control,inTheatersFragment).commit();
         }
     }
-    private void showing() {
-        Log.d(TAG, "showing: ");
-        mingFragment = (InTheatersFragment) getSupportFragmentManager().findFragmentByTag(ing);
-        if (mingFragment == null) {
+    private void showComingSoon() {
+        Log.d(TAG, "showComingSoon: ");
+        comingSoonFragment = (InTheatersFragment) getSupportFragmentManager().findFragmentByTag(COMINGSOON);
+        if (comingSoonFragment == null) {
 
             FragmentManager manager = getSupportFragmentManager();
             FragmentTransaction transaction = manager.beginTransaction();
-            mingFragment = new InTheatersFragment(InTheatersFragment.INTHEATERS);
-            transaction.replace(R.id.control, mingFragment, ing);
+            comingSoonFragment = new InTheatersFragment(InTheatersFragment.INTHEATERS);
+            transaction.replace(R.id.control, comingSoonFragment, COMINGSOON);
             transaction.commit();
         } else {
-
-            getSupportFragmentManager().beginTransaction().show(mingFragment).commit();
+            getSupportFragmentManager().beginTransaction().show(comingSoonFragment).commit();
         }
 
     }
-    private void showtop() {
-        Log.d(TAG, "showtop: ");
-        mtopFragment = (InTheatersFragment) getSupportFragmentManager().findFragmentByTag(top);
-        if (mtopFragment == null) {
+    private void showTOP250() {
+        Log.d(TAG, "showTOP250: ");
+        top250Fragment = (TOP250Fragment) getSupportFragmentManager().findFragmentByTag(TOP250);
+        if (top250Fragment == null) {
 
             FragmentManager manager = getSupportFragmentManager();
             FragmentTransaction transaction = manager.beginTransaction();
-            mtopFragment = new InTheatersFragment(InTheatersFragment.TOP250);
-            transaction.replace(R.id.control, mtopFragment, top);
+            top250Fragment = new TOP250Fragment();
+            transaction.replace(R.id.control, top250Fragment, TOP250);
             transaction.commit();
         } else {
-
-            getSupportFragmentManager().beginTransaction().show(mtopFragment).commit();
+            getSupportFragmentManager().beginTransaction().show(top250Fragment).commit();
         }
     }
 

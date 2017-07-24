@@ -1,15 +1,12 @@
-package com.fykj.yzy.beanmovie;
+package com.fykj.yzy.beanmovie.util;
 
 import android.graphics.Bitmap;
 
 import java.util.Random;
 
-        import android.graphics.Bitmap;
-        import android.graphics.Canvas;
+import android.graphics.Canvas;
         import android.graphics.Color;
         import android.graphics.Paint;
-
-        import java.util.Random;
 
 /**
  * Created by Administrator on 2017/7/8 0008.

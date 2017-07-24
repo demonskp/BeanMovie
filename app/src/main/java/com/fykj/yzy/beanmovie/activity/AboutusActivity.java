@@ -1,10 +1,12 @@
-package com.fykj.yzy.beanmovie;
+package com.fykj.yzy.beanmovie.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import com.fykj.yzy.beanmovie.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

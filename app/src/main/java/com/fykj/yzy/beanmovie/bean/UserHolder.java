@@ -12,8 +12,8 @@ public class UserHolder {
 
     }
 
-    private static UserHolder getUserHolder(){
-        if (instance.equals("")){
+    public static UserHolder getUserHolder(){
+        if (instance==null){
             instance=new UserHolder();
         }
         return instance;

@@ -1,4 +1,4 @@
-package com.fykj.yzy.beanmovie;
+package com.fykj.yzy.beanmovie.activity;
 
 import android.content.Intent;
 import android.os.Handler;
@@ -7,10 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 import com.fykj.yzy.beanmovie.Adapter.InTheatersAdapter;
-import com.fykj.yzy.beanmovie.bean.InTheatersBean;
+import com.fykj.yzy.beanmovie.R;
 import com.fykj.yzy.beanmovie.bean.SearchBean;
 import com.fykj.yzy.beanmovie.bean.SubjectsBean;
 import com.fykj.yzy.beanmovie.net.DataNet;

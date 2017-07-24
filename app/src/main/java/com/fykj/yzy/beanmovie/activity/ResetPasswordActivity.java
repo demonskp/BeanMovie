@@ -1,11 +1,13 @@
-package com.fykj.yzy.beanmovie;
+package com.fykj.yzy.beanmovie.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
+
+import com.fykj.yzy.beanmovie.util.Code;
+import com.fykj.yzy.beanmovie.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

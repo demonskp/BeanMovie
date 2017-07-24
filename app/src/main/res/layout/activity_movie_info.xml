@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.fykj.yzy.beanmovie.MovieInfoActivity">
+    tools:context="com.fykj.yzy.beanmovie.activity.MovieInfoActivity">
 
         <ProgressBar
             android:id="@+id/movie_info_pro"

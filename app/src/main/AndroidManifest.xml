@@ -12,14 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".SearchActivity"
+            android:name=".activity.SearchActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".LoadingActivity"
+            android:name=".activity.LoadingActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,16 +28,27 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SearchResultActivity"
+            android:name=".activity.SearchResultActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".MovieInfoActivity"
+            android:name=".activity.MovieInfoActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".LoginActivity" android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".RegisterActivity" android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".AboutusActivity" android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".ResetPasswordActivity" android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".ModifyUserInfoActivity" android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".activity.LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.RegisterActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.AboutusActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.ResetPasswordActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.ModifyUserInfoActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.CollectionActivity"></activity>
     </application>
 
 </manifest>

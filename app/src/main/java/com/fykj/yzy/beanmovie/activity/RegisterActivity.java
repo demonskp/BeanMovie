@@ -1,4 +1,4 @@
-package com.fykj.yzy.beanmovie;
+package com.fykj.yzy.beanmovie.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -79,6 +79,7 @@ public class RegisterActivity extends AppCompatActivity{
         try {
             /*判断是否注册成功再跳转*/
             db.insertUser(user);
+            finish();
         } catch (Exception e) {
             showToast("注册失败，该用户已存在");
         }

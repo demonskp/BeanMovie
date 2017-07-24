@@ -1,4 +1,4 @@
-package com.fykj.yzy.beanmovie;
+package com.fykj.yzy.beanmovie.activity;
 
 import android.content.Intent;
 import android.os.Handler;
@@ -12,7 +12,12 @@ import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.fykj.yzy.beanmovie.DB.DBManage;
+import com.fykj.yzy.beanmovie.R;
+import com.fykj.yzy.beanmovie.bean.User;
+import com.fykj.yzy.beanmovie.bean.UserHolder;
 import com.fykj.yzy.beanmovie.net.DataNet;
+import com.fykj.yzy.beanmovie.util.PreferencesUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,6 +25,8 @@ import butterknife.ButterKnife;
 public class LoadingActivity extends AppCompatActivity {
     private static final String TAG = "LoadingActivity";
     private static int COUNT=0;
+    private static long userId;
+    private static String userPass;
 
     @BindView(R.id.loading_img)
     ImageView imageView;
@@ -32,7 +39,7 @@ public class LoadingActivity extends AppCompatActivity {
             COUNT++;
             Log.d(TAG, "handleMessage: "+COUNT);
             if (dataNet.getComeSoonBean()!=null&&dataNet.getInTheatersBean()!=null&&dataNet.getTop250Bean()!=null){
-                startMain();
+                jumpTo();
             }else {
                 handler.sendEmptyMessageDelayed(1,200);
                 if (COUNT==40){
@@ -62,6 +69,9 @@ public class LoadingActivity extends AppCompatActivity {
         handler.sendEmptyMessageDelayed(1,200);
         ButterKnife.bind(this);
 
+        userId= PreferencesUtils.getLong(this,PreferencesUtils.USER_ID,0);
+        userPass=PreferencesUtils.getString(this,PreferencesUtils.USER_PASS,"");
+
         loadingAnimation();
     }
 
@@ -73,6 +83,19 @@ public class LoadingActivity extends AppCompatActivity {
         loading.setRepeatCount(-1);
         imageView.startAnimation(loading);
     }
+
+    void jumpTo(){
+        if (DBManage.getDBManage(this).login(userId,userPass)){
+            User user=DBManage.getDBManage(this).findUser(userId).get(0);
+            UserHolder.getUserHolder().setUser(user);
+            startMain();
+        }else {
+        Intent intent=new Intent(this,LoginActivity.class);
+        startActivity(intent);
+        }
+        finish();
+    }
+
 
     void startMain(){
         Intent intent=new Intent(this,MainActivity.class);

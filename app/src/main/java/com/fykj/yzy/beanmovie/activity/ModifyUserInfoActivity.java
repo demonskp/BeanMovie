@@ -1,22 +1,29 @@
-package com.fykj.yzy.beanmovie;
+package com.fykj.yzy.beanmovie.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.fykj.yzy.beanmovie.DB.DBManage;
+import com.fykj.yzy.beanmovie.R;
+import com.fykj.yzy.beanmovie.bean.User;
+import com.fykj.yzy.beanmovie.bean.UserHolder;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class ModifyUserInfoActivity extends AppCompatActivity {
+
+    DBManage db;
+    User user;
+
+
     @BindView(R.id.nickname)
     EditText nickname;
     @BindView(R.id.tv_click_password)
@@ -32,8 +39,11 @@ public class ModifyUserInfoActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         nickname.setEnabled(false);
         autograph_text.setEnabled(false);
-
+        user= UserHolder.getUserHolder().getUser();
+        showUserInfo();
     }
+
+
 
     @OnClick(R.id.nav_top_back)
     public void back(View view){
@@ -53,6 +63,22 @@ public class ModifyUserInfoActivity extends AppCompatActivity {
             autograph_text.setEnabled(false);
         }
         status=(status+1)%2;//循环实现2个不同的功能
+    }
+
+    /*加载当前用户的昵称和签名*/
+    private void showUserInfo(){
+        nickname.setText(user.getName()+"");
+        autograph_text.setText(user.getMotto()+"");
+    }
+
+
+    /*修改当前用户的昵称和个人签名*/
+    private void ModifyUserInfo(){
+        //UserHolder userHolder = new UserHolder();
+        String nickname1 = nickname.getText().toString();
+        String autograph_text1 = autograph_text.getText().toString();
+
+
     }
 
     @OnClick(R.id.tv_click_password)

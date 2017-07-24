@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +12,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.fykj.yzy.beanmovie.R;
-import com.fykj.yzy.beanmovie.SearchActivity;
 import com.fykj.yzy.beanmovie.bean.HistoryBean;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * Created by pg3 on 2017/7/4.

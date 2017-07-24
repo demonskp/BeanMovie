@@ -13,9 +13,9 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <LinearLayout
-        android:gravity="center_vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical">
 
         <ImageView
             android:id="@+id/user_header"
@@ -25,29 +25,29 @@
             app:srcCompat="@android:drawable/sym_def_app_icon" />
 
         <TextView
-            android:paddingLeft="20dp"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:gravity="center_vertical"
             android:id="@+id/user_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:paddingLeft="20dp"
             android:paddingTop="@dimen/nav_header_vertical_spacing"
             android:text="PIKAQ"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="#000000"
-            android:textSize="30sp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+            android:textSize="30sp" />
     </LinearLayout>
 
 
     <TextView
-        android:layout_marginTop="20dp"
         android:id="@+id/user_motto"
-        android:maxLines="2"
-        android:ellipsize="end"
-        android:textColor="@color/colorAccent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="android.studio@android.com" />
+        android:layout_marginTop="20dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="android.studio@android.com"
+        android:textColor="@color/colorAccent" />
 
 </LinearLayout>

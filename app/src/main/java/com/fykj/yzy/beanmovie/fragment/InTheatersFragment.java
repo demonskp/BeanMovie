@@ -1,8 +1,6 @@
-package com.fykj.yzy.beanmovie;
+package com.fykj.yzy.beanmovie.fragment;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -14,13 +12,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.Switch;
 
 import com.fykj.yzy.beanmovie.Adapter.InTheatersAdapter;
+import com.fykj.yzy.beanmovie.R;
+import com.fykj.yzy.beanmovie.activity.MovieInfoActivity;
 import com.fykj.yzy.beanmovie.bean.SubjectsBean;
 import com.fykj.yzy.beanmovie.net.DataNet;
-import com.google.android.gms.plus.PlusOneButton;
 
 import java.util.ArrayList;
 
@@ -34,6 +31,7 @@ public class InTheatersFragment extends Fragment {
     public static final String INTHEATERS="INTHEATERS";
     public static final String COMESOON="COMESOON";
     public static final String TOP250="TOP250";
+    public static final String USBOX="USBOX";
 
     private String type;
 
@@ -62,8 +60,9 @@ public class InTheatersFragment extends Fragment {
     }
 
 
-    public InTheatersFragment() {
+    public InTheatersFragment(String type) {
         // Required empty public constructor
+        this.type=type;
     }
 
 
@@ -87,6 +86,8 @@ public class InTheatersFragment extends Fragment {
             case TOP250:
                 data=new ArrayList<SubjectsBean>(net.getTop250Bean().getSubjects());
                 break;
+            case USBOX:
+                data=new ArrayList<SubjectsBean>(net.getTop250Bean().getSubjects());
         }
         adapter=new InTheatersAdapter(getActivity(),data,handler);
     }

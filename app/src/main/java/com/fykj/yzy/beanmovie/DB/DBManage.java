@@ -119,6 +119,14 @@ public class DBManage {
         return collections;
     }
 
+    public List<CollectionBean> findAllCollection(){
+        List<CollectionBean> collections=collectionDao.queryBuilder().list();
+        if (collections.size()==0){
+            return null;
+        }
+        return collections;
+    }
+
     public boolean deleteCollection(long id){
         try{
             collectionDao.deleteByKey(id);

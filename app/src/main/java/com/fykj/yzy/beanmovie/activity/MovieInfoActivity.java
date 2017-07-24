@@ -1,4 +1,4 @@
-package com.fykj.yzy.beanmovie;
+package com.fykj.yzy.beanmovie.activity;
 
 import android.net.Uri;
 import android.os.Handler;
@@ -16,6 +16,7 @@ import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import com.fykj.yzy.beanmovie.R;
 import com.fykj.yzy.beanmovie.bean.SubjectInfoBean;
 import com.fykj.yzy.beanmovie.net.DataNet;
 
