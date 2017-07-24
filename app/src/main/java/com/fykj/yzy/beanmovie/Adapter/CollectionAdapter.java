@@ -3,6 +3,7 @@ package com.fykj.yzy.beanmovie.Adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ import butterknife.ButterKnife;
  */
 
 public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.MyHolder> {
+    private static final String TAG = "CollectionAdapter";
 
     private List<CollectionBean> data;
     private Context context;
@@ -53,7 +55,8 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.My
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(context, MovieInfoActivity.class);
-                intent.putExtra("id",bean.getId());
+                intent.putExtra("id",bean.getId()+"");
+                Log.d(TAG, "onClick: "+bean.getId()+"");
                 context.startActivity(intent);
             }
         });

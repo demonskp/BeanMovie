@@ -55,6 +55,7 @@ public class MovieInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_movie_info);
         dataNet=DataNet.getDataNew();
         id=getIntent().getStringExtra("id");
+        Log.d(TAG, "onCreate: "+id);
         ButterKnife.bind(this);
         dataNet.searchMovieInfo(handler,id);
         webView.getSettings().setJavaScriptEnabled(true);//开启JS

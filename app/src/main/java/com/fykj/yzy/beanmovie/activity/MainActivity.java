@@ -15,12 +15,15 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.fykj.yzy.beanmovie.DB.DBManage;
 import com.fykj.yzy.beanmovie.bean.User;
 import com.fykj.yzy.beanmovie.bean.UserHolder;
 import com.fykj.yzy.beanmovie.fragment.InTheatersFragment;
 import com.fykj.yzy.beanmovie.R;
 import com.fykj.yzy.beanmovie.fragment.TOP250Fragment;
+import com.fykj.yzy.beanmovie.util.NullUtil;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
@@ -32,6 +35,7 @@ public class MainActivity extends AppCompatActivity
     private static final String TAG = "MainActivity";
 
     private User nowUser;
+    private DBManage dbManage;
 
 
     //yqs
@@ -75,7 +79,7 @@ public class MainActivity extends AppCompatActivity
         nowUser= UserHolder.getUserHolder().getUser();
         ButterKnife.bind(this);
 
-
+        dbManage=DBManage.getDBManage(this);
 
         initView();
     }
@@ -112,8 +116,13 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent2);
                 break;
             case R.id.nav_collection:
-                Intent intent3=new Intent(this,CollectionActivity.class);
-                startActivity(intent3);
+                if (dbManage.findAllCollection()==null){
+                    Toast.makeText(this,"暂时没有收藏",Toast.LENGTH_SHORT).show();
+                }else {
+                    Intent intent3=new Intent(this,CollectionActivity.class);
+                    startActivity(intent3);
+                }
+                break;
 
         }
 //        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
