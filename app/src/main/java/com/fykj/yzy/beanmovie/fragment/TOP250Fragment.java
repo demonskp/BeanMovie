@@ -101,12 +101,12 @@ public class TOP250Fragment extends Fragment {
 
                 switch (position){
                     case 0:
-                        usBtn.setTextColor(getResources().getColor(R.color.color_3AA94C));
-                        doubanBtn.setTextColor(getResources().getColor(R.color.color_FFE1FF));
+                        usBtn.setTextColor(getResources().getColor(R.color.common_bottom_bar_normal_bg));
+                        doubanBtn.setTextColor(getResources().getColor(R.color.btn_gray_pressed_status));
                         break;
                     case 1:
-                        usBtn.setTextColor(getResources().getColor(R.color.color_FFE1FF));
-                        doubanBtn.setTextColor(getResources().getColor(R.color.color_3AA94C));
+                        usBtn.setTextColor(getResources().getColor(R.color.btn_gray_pressed_status));
+                        doubanBtn.setTextColor(getResources().getColor(R.color.common_bottom_bar_normal_bg));
                         break;
                 }
             }

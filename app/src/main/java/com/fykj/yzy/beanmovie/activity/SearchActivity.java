@@ -95,6 +95,8 @@ public class SearchActivity extends AppCompatActivity {
         }else {
             HistoryBean bean = new HistoryBean(searchString, getDayAndMouth());
             db.insertHistory(bean);
+            historyData.add(bean);
+            adapter.notifyDataSetChanged();
 
             Intent intent = new Intent(this, SearchResultActivity.class);
             intent.putExtra("searchString", searchString);

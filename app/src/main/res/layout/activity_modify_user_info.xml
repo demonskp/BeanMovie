@@ -78,7 +78,6 @@
                 android:background="@null"
                 android:lines="1"
                 android:text="海马玩"
-                android:textColor="@color/color_DDDDDD"
                 android:textSize="14sp"/>
         </RelativeLayout>
     </LinearLayout>
@@ -113,14 +112,13 @@
 
             <TextView
                 android:id="@+id/tv_click_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:background="@null"
-                android:gravity="center"
+                android:gravity="right|center_vertical"
                 android:text="点击可修改"
-                android:textColor="@color/color_DDDDDD"
                 android:textSize="14sp"/>
         </RelativeLayout>
     </LinearLayout>
@@ -148,7 +146,6 @@
 
 
         <EditText
-            android:gravity="top"
             android:id="@+id/autograph_text"
             android:layout_width="match_parent"
             android:layout_height="100dp"
@@ -156,9 +153,9 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:text="123456789"
             android:background="@null"
-            android:textColor="@color/color_DDDDDD"/>
+            android:gravity="top"
+            android:text="123456789" />
 
         <View
             android:layout_width="match_parent"

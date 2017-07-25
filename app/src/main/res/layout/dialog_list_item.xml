@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="40dp"
+    android:layout_marginRight="40dp"
+    android:background="@drawable/dialog_confirm_bg">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="@null"
+        android:padding="5dp"
+        android:textSize="18sp"
+        android:textColor="@color/dialog_ok_canle"
+        android:id="@+id/dialog_tip" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/list_item_xiantiao"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:textColor="@color/dialog_ok_canle"
+        android:background="@null"
+        android:id="@+id/dialog_share" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/list_item_xiantiao"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:textColor="@color/dialog_ok_canle"
+        android:background="@null"
+        android:id="@+id/dialog_formesgg" />
+</LinearLayout>

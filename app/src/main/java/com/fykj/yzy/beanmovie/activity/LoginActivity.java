@@ -52,38 +52,27 @@ public class LoginActivity extends AppCompatActivity {
                 flag3=NullUtil.isNull(textEdit.getText().toString().trim()),
                 flag4=NullUtil.isNull(passworldEdit.getText().toString().trim());
 
-        if(flag1&&flag2)
-            ToastShow("手机号码和密码都不能为空");
-        if(flag1&&!flag2)
-            ToastShow("手机号码不能为空");
-        if(!flag1&&flag2)
+        if (flag3){
+            ToastShow("账号不能为空");
+        }else if (flag4){
             ToastShow("密码不能为空");
-        else {
-            if(!flag3 &&!flag4)
-                ToastShow("手机号码和密码都不合法");
-            if(!flag3&&flag4)
-                ToastShow("手机号码不合法");
-            if(flag3&&!flag4)
-                ToastShow("密码不合法");
-        }
-
-        long id=Long.valueOf(textEdit.getText()+"");
-        String pw=passworldEdit.getText().toString();
-        User user=new User();
-
-        if (dbManage.login(id,pw)){
-            user=dbManage.findUser(id).get(0);
-            UserHolder.getUserHolder().setUser(user);
-            PreferencesUtils.putLong(this,PreferencesUtils.USER_ID,user.getId());
-            PreferencesUtils.putString(this,PreferencesUtils.USER_PASS,user.getPassWorld());
-
-            Intent intent=new Intent(this,MainActivity.class);
-            startActivity(intent);
         }else {
-            ToastShow("账号密码有误");
+            long id=Long.valueOf(textEdit.getText()+"");
+            String pw=passworldEdit.getText().toString();
+            User user=new User();
+
+            if (dbManage.login(id,pw)){
+                user=dbManage.findUser(id).get(0);
+                UserHolder.getUserHolder().setUser(user);
+                PreferencesUtils.putLong(this,PreferencesUtils.USER_ID,user.getId());
+                PreferencesUtils.putString(this,PreferencesUtils.USER_PASS,user.getPassWorld());
+
+                Intent intent=new Intent(this,MainActivity.class);
+                startActivity(intent);
+            }else {
+                ToastShow("账号密码有误");
+            }
         }
-
-
     }
 
     @Override

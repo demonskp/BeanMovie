@@ -13,6 +13,7 @@ import com.fykj.yzy.beanmovie.DB.DBManage;
 import com.fykj.yzy.beanmovie.R;
 import com.fykj.yzy.beanmovie.bean.User;
 import com.fykj.yzy.beanmovie.bean.UserHolder;
+import com.fykj.yzy.beanmovie.util.DialogCreaterUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,6 +38,7 @@ public class ModifyUserInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modify_user_info);
         ButterKnife.bind(this);
+        db=DBManage.getDBManage(this);
         nickname.setEnabled(false);
         autograph_text.setEnabled(false);
         user= UserHolder.getUserHolder().getUser();
@@ -61,6 +63,7 @@ public class ModifyUserInfoActivity extends AppCompatActivity {
             modify_user_info.setText("编辑");
             nickname.setEnabled(false);
             autograph_text.setEnabled(false);
+            modifyUserInfo();
         }
         status=(status+1)%2;//循环实现2个不同的功能
     }
@@ -73,12 +76,22 @@ public class ModifyUserInfoActivity extends AppCompatActivity {
 
 
     /*修改当前用户的昵称和个人签名*/
-    private void ModifyUserInfo(){
-        //UserHolder userHolder = new UserHolder();
+    private void modifyUserInfo(){
         String nickname1 = nickname.getText().toString();
         String autograph_text1 = autograph_text.getText().toString();
-
-
+        User user=new User();
+        user.setId(this.user.getId());
+        user.setName(nickname1);
+        user.setMotto(autograph_text1);
+        user.setPassWorld(this.user.getPassWorld());
+        if (db.updataUser(user)){
+            UserHolder.getUserHolder().setUser(user);
+            this.user=user;
+            showUserInfo();
+        }else {
+            Toast.makeText(this,"更新设置失败",Toast.LENGTH_SHORT).show();
+            showUserInfo();
+        }
     }
 
     @OnClick(R.id.tv_click_password)

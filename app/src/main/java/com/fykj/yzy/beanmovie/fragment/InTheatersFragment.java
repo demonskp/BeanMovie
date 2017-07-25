@@ -1,5 +1,6 @@
 package com.fykj.yzy.beanmovie.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -24,7 +25,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-
+@SuppressLint("ValidFragment")
 public class InTheatersFragment extends Fragment {
     private static final String TAG = "InTheatersFragment";
 
@@ -34,6 +35,7 @@ public class InTheatersFragment extends Fragment {
     public static final String USBOX="USBOX";
 
     private String type;
+    private Bundle bundle;
 
     View view;
     ArrayList<SubjectsBean> data;
@@ -41,6 +43,7 @@ public class InTheatersFragment extends Fragment {
 
     @BindView(R.id.intheather_recycleView)
     RecyclerView recyclerView;
+
 
 
     Handler handler=new Handler(new Handler.Callback() {
@@ -110,7 +113,6 @@ public class InTheatersFragment extends Fragment {
     public void onStart() {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
-        Log.d(TAG, "onStart: ");
         super.onStart();
     }
 }

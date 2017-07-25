@@ -24,6 +24,7 @@ import com.fykj.yzy.beanmovie.fragment.InTheatersFragment;
 import com.fykj.yzy.beanmovie.R;
 import com.fykj.yzy.beanmovie.fragment.TOP250Fragment;
 import com.fykj.yzy.beanmovie.util.NullUtil;
+import com.fykj.yzy.beanmovie.util.PreferencesUtils;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
@@ -88,6 +89,8 @@ public class MainActivity extends AppCompatActivity
     protected void onResume() {
         super.onResume();
         nowUser= UserHolder.getUserHolder().getUser();
+        initDrawUserInfo();
+
     }
 
     @Override
@@ -123,11 +126,22 @@ public class MainActivity extends AppCompatActivity
                     startActivity(intent3);
                 }
                 break;
+            case R.id.nav_switch:
+                changUser();
+                break;
 
         }
 //        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void changUser() {
+        UserHolder.getUserHolder().setUser(new User());
+        PreferencesUtils.clear(this);
+        Intent intent=new Intent(this,LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     @Override

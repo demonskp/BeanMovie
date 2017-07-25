@@ -91,6 +91,18 @@ public class DBManage {
         return users;
     }
 
+    public boolean updataUser(User user){
+        try{
+            userDao.update(user);
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
+
     public boolean login(long id,String passworld){
         List<User> users=findUser(id);
 
