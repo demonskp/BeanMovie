@@ -1,5 +1,6 @@
 package com.fykj.yzy.beanmovie.activity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
@@ -13,6 +14,7 @@ import com.fykj.yzy.beanmovie.R;
 import com.fykj.yzy.beanmovie.bean.SearchBean;
 import com.fykj.yzy.beanmovie.bean.SubjectsBean;
 import com.fykj.yzy.beanmovie.net.DataNet;
+import com.fykj.yzy.beanmovie.util.DialogCreaterUtil;
 
 import java.util.ArrayList;
 
@@ -25,6 +27,7 @@ public class SearchResultActivity extends AppCompatActivity {
     DataNet dataNet;
     private ArrayList<SubjectsBean> data;
     private static String searchString;
+    private Dialog dialog;
 
     @BindView(R.id.search_result_listView)
     RecyclerView listView;
@@ -35,6 +38,7 @@ public class SearchResultActivity extends AppCompatActivity {
             SearchBean searchBean= (SearchBean) msg.obj;
             data=new ArrayList<SubjectsBean>(searchBean.getSubjects());
             recycleViewSet();
+            dialog.dismiss();
             return false;
         }
     });
@@ -55,6 +59,7 @@ public class SearchResultActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         dataNet=DataNet.getDataNew();
         searchString=getIntent().getStringExtra("searchString");
+        dialog= DialogCreaterUtil.showprogressdialog(this,-1,false,true);
         dataNet.searchString(handler,searchString);
     }
 

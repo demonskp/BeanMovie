@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginTop="2dp"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <include layout="@layout/sticky_item_comesoon"/>
+
+    <LinearLayout
+        android:id="@+id/item_list_comesoon"
+        android:background="#ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:id="@+id/item_imag_comesoon"
+        android:layout_margin="12dp"
+        android:src="@mipmap/img_bg_holder"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:paddingTop="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:paddingLeft="5dp"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/item_title_comesoon"
+                android:text="与君相恋100次"
+                android:textSize="17sp"
+                android:textColor="#0a0a0a"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:ellipsize="end"/>
+
+            <TextView
+                android:id="@+id/item_directors_comesoon"
+                android:text="导演：月川翔"
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:textSize="10sp"
+                android:ellipsize="end"/>
+            <TextView
+                android:id="@+id/item_casts_comesoon"
+                android:text="主演：miwa/阪口健太郎/龙星凉"
+                android:layout_marginTop="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:textSize="10sp"
+                android:ellipsize="end"/>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:text="3644人想看"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#3B3B3B"
+                android:maxLines="1"
+                android:textSize="13sp"
+                android:ellipsize="end"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="50dp"
+            android:layout_weight="0"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/item_collection_comesoon"
+                android:background="@drawable/ic_collection_no"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="30dp"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

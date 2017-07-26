@@ -61,6 +61,8 @@ public class InTheatersAdapter extends RecyclerView.Adapter<InTheatersAdapter.My
         final String castsName=getCastsName(subjectsBean.getCasts());
         String rating=getRating(subjectsBean.getRating());
 
+
+
         Picasso.with(context).load(subjectsBean.getImages().getLarge()).into(holder.imageView);
         holder.titleText.setText(subjectsBean.getTitle());
         holder.directorsText.setText("导演："+directorName);

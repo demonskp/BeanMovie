@@ -1,11 +1,13 @@
 package com.fykj.yzy.beanmovie.activity;
 
+import android.app.Dialog;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
@@ -19,6 +21,7 @@ import android.widget.ProgressBar;
 import com.fykj.yzy.beanmovie.R;
 import com.fykj.yzy.beanmovie.bean.SubjectInfoBean;
 import com.fykj.yzy.beanmovie.net.DataNet;
+import com.fykj.yzy.beanmovie.util.DialogCreaterUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,6 +39,7 @@ public class MovieInfoActivity extends AppCompatActivity {
     private String url;
     private DataNet dataNet;
     private SubjectInfoBean data;
+    private Dialog dialog;
 
     private Handler handler=new Handler(new Handler.Callback() {
         @Override
@@ -44,6 +48,7 @@ public class MovieInfoActivity extends AppCompatActivity {
             url=data.getMobile_url();
             Log.d(TAG, "handleMessage: "+url);
             webView.loadUrl(url);
+            dialog.dismiss();
             return false;
         }
     });
@@ -57,6 +62,9 @@ public class MovieInfoActivity extends AppCompatActivity {
         id=getIntent().getStringExtra("id");
         Log.d(TAG, "onCreate: "+id);
         ButterKnife.bind(this);
+
+        dialog=DialogCreaterUtil.showprogressdialog(this,-1,false,true);
+
         dataNet.searchMovieInfo(handler,id);
         webView.getSettings().setJavaScriptEnabled(true);//开启JS
         webView.getSettings().setBlockNetworkImage(false);//开启图片加载
@@ -83,6 +91,14 @@ public class MovieInfoActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK) && webView.canGoBack()) {
+            webView.goBack();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
 
