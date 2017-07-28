@@ -50,9 +50,12 @@ public class DBManage {
       }
 
 
-      public void insertHistory(HistoryBean historyBean){
+      public boolean insertHistory(HistoryBean historyBean){
           if (findHistory(historyBean.getSearchString())==null){
               historyDao.insert(historyBean);
+              return true;
+          }else {
+              return false;
           }
 
       }

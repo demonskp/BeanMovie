@@ -58,12 +58,13 @@ public class InTheatersAdapter extends RecyclerView.Adapter<InTheatersAdapter.My
     public void onBindViewHolder(final MyHolder holder, int position) {
         final SubjectsBean subjectsBean=data.get(position);
         String directorName=getDirectorName(subjectsBean.getDirectors());
+
         final String castsName=getCastsName(subjectsBean.getCasts());
+
         String rating=getRating(subjectsBean.getRating());
 
 
-
-        Picasso.with(context).load(subjectsBean.getImages().getLarge()).into(holder.imageView);
+        Picasso.with(context).load(subjectsBean.getImages().getLarge()).placeholder(R.mipmap.movie_default_medium).into(holder.imageView);
         holder.titleText.setText(subjectsBean.getTitle());
         holder.directorsText.setText("导演："+directorName);
         holder.castsText.setText("演员："+castsName);
@@ -170,7 +171,12 @@ public class InTheatersAdapter extends RecyclerView.Adapter<InTheatersAdapter.My
     }
 
     private String getDirectorName(List<SubjectsBean.DirectorsBean> directors) {
+
+
         int size=directors.size();
+        if (size<=0){
+            return "null";
+        }
 
         StringBuffer result=new StringBuffer();
         result.append(directors.get(0).getName());

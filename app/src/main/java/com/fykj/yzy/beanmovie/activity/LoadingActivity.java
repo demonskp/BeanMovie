@@ -6,6 +6,7 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
@@ -17,6 +18,8 @@ import com.fykj.yzy.beanmovie.R;
 import com.fykj.yzy.beanmovie.bean.User;
 import com.fykj.yzy.beanmovie.bean.UserHolder;
 import com.fykj.yzy.beanmovie.net.DataNet;
+import com.fykj.yzy.beanmovie.util.DialogCreaterUtil;
+import com.fykj.yzy.beanmovie.util.NetUtil;
 import com.fykj.yzy.beanmovie.util.PreferencesUtils;
 
 import butterknife.BindView;
@@ -66,6 +69,19 @@ public class LoadingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_loading);
         dataNet=DataNet.getDataNew();
         dataNet.init();
+        if (!NetUtil.isNetWorkLive(this)){
+            DialogCreaterUtil.createConfirmDialog(this, "网络连接未打开", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            }, new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
+        }
         handler.sendEmptyMessageDelayed(1,200);
         ButterKnife.bind(this);
 

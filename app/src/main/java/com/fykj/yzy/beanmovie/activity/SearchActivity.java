@@ -1,5 +1,6 @@
 package com.fykj.yzy.beanmovie.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
@@ -9,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -88,14 +90,22 @@ public class SearchActivity extends AppCompatActivity {
 
     @OnClick(R.id.search_text_cancel)
     void clickEnter(){
+        //隐藏软键盘
+        InputMethodManager manager= (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        manager.hideSoftInputFromWindow(searchEdit.getWindowToken(),0);
+
+
         String searchString=searchEdit.getText()+"";
         Log.d(TAG, "clickEnter: "+searchString);
         if (searchString==""){
             Toast.makeText(this,"请输入你要搜索的内容",Toast.LENGTH_LONG).show();
         }else {
             HistoryBean bean = new HistoryBean(searchString, getDayAndMouth());
-            db.insertHistory(bean);
-            historyData.add(bean);
+            if ( db.insertHistory(bean)){
+                historyData.add(bean);
+            }
+
+
             adapter.notifyDataSetChanged();
 
             Intent intent = new Intent(this, SearchResultActivity.class);

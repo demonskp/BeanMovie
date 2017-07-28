@@ -49,6 +49,7 @@ public class MovieInfoActivity extends AppCompatActivity {
             Log.d(TAG, "handleMessage: "+url);
             webView.loadUrl(url);
             dialog.dismiss();
+
             return false;
         }
     });
@@ -90,7 +91,6 @@ public class MovieInfoActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {

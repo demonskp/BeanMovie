@@ -25,7 +25,17 @@ import com.fykj.yzy.beanmovie.R;
 import com.fykj.yzy.beanmovie.fragment.TOP250Fragment;
 import com.fykj.yzy.beanmovie.util.NullUtil;
 import com.fykj.yzy.beanmovie.util.PreferencesUtils;
+import com.fykj.yzy.beanmovie.util.ToastUtil;
 import com.squareup.picasso.Picasso;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMAuthListener;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.media.UMWeb;
+
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,8 +45,11 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,CompoundButton.OnCheckedChangeListener {
     private static final String TAG = "MainActivity";
 
+
     private User nowUser;
     private DBManage dbManage;
+    //友盟分享的监听器
+    private UMShareListener shareListener;
 
 
     //yqs
@@ -129,6 +142,9 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_switch:
                 changUser();
                 break;
+            case R.id.nav_share:
+                ShareWeb("R.mipmap.img_test.webp");
+                break;
 
         }
 //        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -161,6 +177,41 @@ public class MainActivity extends AppCompatActivity
                 break;
         }
     }
+    private void ShareImage(String image,String thumb){
+        UMImage pic = new UMImage(this,image);
+        pic.setThumb(new UMImage(this,thumb));
+        new ShareAction(this)
+                .withMedia(pic)
+                .setPlatform(SHARE_MEDIA.WEIXIN)
+                .setCallback(shareListener)
+                .withText("分享链接").share();}
+
+
+
+
+    private void ShareText(){
+        new ShareAction(this).withText("欢迎下载友盟")
+                .setPlatform(SHARE_MEDIA.WEIXIN)
+                .setCallback(shareListener).open();
+    }
+
+    private void ShareWeb(String thumb_img){
+        UMImage thumb = new UMImage(this,thumb_img);
+        UMWeb web = new UMWeb("https://github.com/demonskp/BeanMovie");
+        web.setThumb(thumb);
+        web.setDescription("豆影-带你打开电影世界");
+        web.setTitle("分享应用-豆影");
+        new ShareAction(this)
+                .withMedia(web)
+                .setPlatform(SHARE_MEDIA.WEIXIN)
+                .setCallback(shareListener)
+                .share();
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        UMShareAPI.get(this).onActivityResult(requestCode,resultCode,data);
+    }
 
 
     @OnClick(R.id.main_nev_btn)
@@ -180,6 +231,30 @@ public class MainActivity extends AppCompatActivity
         rb2.setOnCheckedChangeListener(this);
         rb3.setOnCheckedChangeListener(this);
         rb2.performClick(); //预点击
+
+
+        //初始化友盟分享的监听
+        shareListener=new UMShareListener() {
+            @Override
+            public void onStart(SHARE_MEDIA share_media) {
+
+            }
+
+            @Override
+            public void onResult(SHARE_MEDIA share_media) {
+
+            }
+
+            @Override
+            public void onError(SHARE_MEDIA share_media, Throwable throwable) {
+                ToastUtil.showLongToast(MainActivity.this,throwable.getMessage());
+            }
+
+            @Override
+            public void onCancel(SHARE_MEDIA share_media) {
+
+            }
+        };
 
     }
 
