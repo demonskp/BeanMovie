@@ -2,6 +2,7 @@ package com.fykj.yzy.beanmovie.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -17,12 +18,14 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.fykj.yzy.beanmovie.CircleImageTransformation;
 import com.fykj.yzy.beanmovie.DB.DBManage;
 import com.fykj.yzy.beanmovie.bean.User;
 import com.fykj.yzy.beanmovie.bean.UserHolder;
 import com.fykj.yzy.beanmovie.fragment.InTheatersFragment;
 import com.fykj.yzy.beanmovie.R;
 import com.fykj.yzy.beanmovie.fragment.TOP250Fragment;
+import com.fykj.yzy.beanmovie.util.NotificationUtil;
 import com.fykj.yzy.beanmovie.util.NullUtil;
 import com.fykj.yzy.beanmovie.util.PreferencesUtils;
 import com.fykj.yzy.beanmovie.util.ToastUtil;
@@ -35,6 +38,8 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMWeb;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -51,11 +56,15 @@ public class MainActivity extends AppCompatActivity
     //友盟分享的监听器
     private UMShareListener shareListener;
 
+    private List<Fragment> fragmentList=new ArrayList<Fragment>();
 
     //yqs
+    InTheatersFragment comeSoonFragment;
     InTheatersFragment inTheatersFragment;
-    InTheatersFragment comingSoonFragment;
     TOP250Fragment top250Fragment;
+
+    FragmentManager manager ;
+    FragmentTransaction transaction;
 
     private static final String INTHEATERS="recent";
     private static final String COMINGSOON="ing";
@@ -145,6 +154,9 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_share:
                 ShareWeb("R.mipmap.img_test.webp");
                 break;
+            case R.id.nav_gallery:
+                Intent intent=new Intent(this,LoginActivity.class);
+                NotificationUtil.getInstance(this).showDefuatNotification(this,R.mipmap.ic_eye_normal,"这是测试标题","这是测试文本",intent);
 
         }
 //        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -205,7 +217,7 @@ public class MainActivity extends AppCompatActivity
                 .withMedia(web)
                 .setPlatform(SHARE_MEDIA.WEIXIN)
                 .setCallback(shareListener)
-                .share();
+                .open();
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -222,6 +234,16 @@ public class MainActivity extends AppCompatActivity
 
 
     public  void initView(){
+
+//        comeSoonFragment = new InTheatersFragment(InTheatersFragment.COMESOON);
+//        inTheatersFragment = new InTheatersFragment(InTheatersFragment.INTHEATERS);
+//        top250Fragment = new TOP250Fragment();
+
+        fragmentList.add(0,comeSoonFragment);
+        fragmentList.add(1,inTheatersFragment);
+        fragmentList.add(2,top250Fragment);
+
+
 
         initDrawUserInfo();
 
@@ -270,50 +292,62 @@ public class MainActivity extends AppCompatActivity
         if (nowUser.getMotto()!=null){
             mottoText.setText(nowUser.getMotto());
         }
-        Picasso.with(this).load(R.mipmap.ic_movie_logo).into(headerImage);
+        Picasso.with(this).load(R.mipmap.ic_movie_logo).transform(new CircleImageTransformation()).into(headerImage);
     }
 
 
     private void showInTheater() {
-        
-        inTheatersFragment = (InTheatersFragment) getSupportFragmentManager().findFragmentByTag(INTHEATERS);
-        if (inTheatersFragment == null) {
-            FragmentManager manager = getSupportFragmentManager();
-            FragmentTransaction transaction = manager.beginTransaction();
-            inTheatersFragment = new InTheatersFragment(InTheatersFragment.COMESOON);
-            transaction.replace(R.id.control, inTheatersFragment, INTHEATERS);
-            transaction.commit();
-        } else {
-            getSupportFragmentManager().beginTransaction().replace(R.id.control,inTheatersFragment).commit();
+
+        comeSoonFragment = (InTheatersFragment) fragmentList.get(0);
+
+         manager = getSupportFragmentManager();
+         transaction = manager.beginTransaction();
+        hideFragment();
+        if (comeSoonFragment == null) {
+            comeSoonFragment = new InTheatersFragment(InTheatersFragment.COMESOON);
         }
+        transaction.add(R.id.control, comeSoonFragment, INTHEATERS);
+        transaction.commit();
+
     }
     private void showComingSoon() {
         Log.d(TAG, "showComingSoon: ");
-        comingSoonFragment = (InTheatersFragment) getSupportFragmentManager().findFragmentByTag(COMINGSOON);
-        if (comingSoonFragment == null) {
-
-            FragmentManager manager = getSupportFragmentManager();
-            FragmentTransaction transaction = manager.beginTransaction();
-            comingSoonFragment = new InTheatersFragment(InTheatersFragment.INTHEATERS);
-            transaction.replace(R.id.control, comingSoonFragment, COMINGSOON);
-            transaction.commit();
-        } else {
-            getSupportFragmentManager().beginTransaction().show(comingSoonFragment).commit();
+        inTheatersFragment = (InTheatersFragment) fragmentList.get(1);
+         manager = getSupportFragmentManager();
+        transaction = manager.beginTransaction();
+        hideFragment();
+        if (inTheatersFragment == null) {
+            inTheatersFragment = new InTheatersFragment(InTheatersFragment.INTHEATERS);
         }
+//        transaction.replace(R.id.control, inTheatersFragment, COMINGSOON);
+        transaction.add(R.id.control, inTheatersFragment, COMINGSOON);
+        transaction.commit();
 
     }
     private void showTOP250() {
         Log.d(TAG, "showTOP250: ");
-        top250Fragment = (TOP250Fragment) getSupportFragmentManager().findFragmentByTag(TOP250);
-        if (top250Fragment == null) {
+        top250Fragment = (TOP250Fragment) fragmentList.get(2);
+         manager = getSupportFragmentManager();
+         transaction = manager.beginTransaction();
 
-            FragmentManager manager = getSupportFragmentManager();
-            FragmentTransaction transaction = manager.beginTransaction();
+        hideFragment();
+        if (top250Fragment == null) {
             top250Fragment = new TOP250Fragment();
-            transaction.replace(R.id.control, top250Fragment, TOP250);
-            transaction.commit();
-        } else {
-            getSupportFragmentManager().beginTransaction().show(top250Fragment).commit();
+        }
+
+        transaction.add(R.id.control, top250Fragment, TOP250);
+        transaction.commit();
+    }
+
+    private void hideFragment(){
+        if (comeSoonFragment!=null){
+           transaction.hide(comeSoonFragment);
+        }
+        if (inTheatersFragment!=null){
+            transaction.hide(inTheatersFragment);
+        }
+        if (top250Fragment!=null){
+            transaction.hide(top250Fragment);
         }
     }
 

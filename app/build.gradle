@@ -28,7 +28,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
-            minifyEnabled true
+//            minifyEnabled true
             signingConfig  signingConfigs.debug
             proguardFiles  'proguard-rules.pro'
         }
@@ -63,6 +63,9 @@ dependencies {
     compile 'com.google.android.gms:play-services-plus:10.2.6'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
+
+
+    //友盟的SDK
     compile files('libs/SocialSDK_WeChat_Simplify.jar')
     compile files('libs/umeng_shareboard_widget.jar')
     compile files('libs/umeng_social_api.jar')

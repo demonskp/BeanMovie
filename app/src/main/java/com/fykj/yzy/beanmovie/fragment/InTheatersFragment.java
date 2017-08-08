@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -43,7 +44,8 @@ public class InTheatersFragment extends Fragment {
 
     @BindView(R.id.intheather_recycleView)
     RecyclerView recyclerView;
-
+    @BindView(R.id.intheather_refrenshlayout)
+    SwipeRefreshLayout refreshLayout;
 
 
     Handler handler=new Handler(new Handler.Callback() {
@@ -113,6 +115,16 @@ public class InTheatersFragment extends Fragment {
     public void onStart() {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
+        
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Log.d(TAG, "onRefresh: showshuaxin");
+                refreshLayout.setRefreshing(false);
+            }
+        });
+        
+        
         super.onStart();
     }
 }
